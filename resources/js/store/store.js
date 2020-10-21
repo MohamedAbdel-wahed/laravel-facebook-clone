@@ -8,7 +8,8 @@ export default new Vuex.Store({
         authUser:{},
         posts:[],
         activeTab:'timeline',
-        showCommentSection:false,
+        likes:[],
+        comments:[]
     },
     getters:{},
     mutations:{
@@ -20,7 +21,14 @@ export default new Vuex.Store({
         },
         setActiveTab(state,payload){
             state.activeTab=payload
+        },
+        getLikes(state,payload){
+          state.likes=payload
+        },
+        getComments(state,payload){
+          state.comments=payload
         }
+
     },
     actions:{
         getAuthUser(context,payload){
@@ -31,6 +39,12 @@ export default new Vuex.Store({
         },
         setActiveTab(context,payload){
             context.commit('setActiveTab',payload)
+        },
+        getLikes(context,payload){
+          context.commit('getLikes',payload)
+        },
+        getComments(context,payload){
+          context.commit('getComments',payload)
         }
     },
 })

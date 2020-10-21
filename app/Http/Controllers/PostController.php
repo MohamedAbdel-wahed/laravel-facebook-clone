@@ -48,7 +48,7 @@ class PostController extends Controller
     public function getLikes(Post $post)
     {
        $ids= $post->likes->pluck('user_id');
-       $likers=User::whereIn('id',$ids)->pluck('name');
+       $likers=User::whereIn('id',$ids)->select('fName','lName','current_photo')->get();
        return response($likers);
     }
 }

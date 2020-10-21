@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
+<main class="container mx-auto mx-12 mt-16">
     <div class="flex">
-        <div class="w-full">
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Login') }}
-                </header>
+        <div class="w-1/2 flex flex-col justify-center items-center select-none">
+            <h1 class="text-gray-800 font-bold tracking-wide" style="font-family:cursive; font-size:50px;">Login</h1>
+            <img src="/images/svg/big-fb-logo.svg" style="width:400px;">
+        </div>
 
+        <div class="w-1/2 flex justify-center items-center">
+            <section class="w-10/12 flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-md">
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('E-Mail Address') }}:
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-1">
+                            E-Mail:
                         </label>
 
                         <input id="email" type="email"
@@ -30,8 +31,8 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Password') }}:
+                        <label for="password" class="block text-gray-700 text-sm font-bold mb-1">
+                            Password:
                         </label>
 
                         <input id="password" type="password"

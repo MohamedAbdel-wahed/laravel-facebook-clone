@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
     name: 'Like',
     props:['postId'],
@@ -14,6 +16,11 @@ export default {
             liked:false,
             likeIcon:'like.svg'
         }
+    },
+    computed:{
+      ...mapState([
+        'authUser'
+      ])
     },
     mounted(){
         axios.get(`/api/posts/${this.postId}/like-status`)
@@ -26,8 +33,8 @@ export default {
         likePost(postId){
             axios.post(`/api/posts/${postId}/like`)
                  .then(res=>{
-                     this.liked=!this.liked
                      this.likeIcon= this.liked ? 'liked.svg' : 'like.svg'
+            this.liked=!this.liked
                  }).catch(err=>console.log(err))
         },
     }

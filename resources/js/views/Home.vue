@@ -13,21 +13,16 @@
 </template>
 
 <script>
-
 import {mapState} from 'vuex'
-import List from '../components/List'
-import Contacts from '../components/Contacts'
-import Stories from '../components/Stories'
-import NewPost from '../components/NewPost'
-import HomePosts from '../components/HomePosts'
+
 export default {
     name: 'Home',
     components:{
-        List,
-        Contacts,
-        Stories,
-        NewPost,
-        HomePosts
+        List: () => import(/* webpackChunckName: 'List' */ '../components/List'),
+        Contacts: () => import(/* webpackChunckName: 'Contacts' */ '../components/Contacts'),
+        Stories: () => import(/* webpackChunckName: 'Stories' */ '../components/Stories'),
+        NewPost: () => import(/* webpackChunckName: 'NewPost' */ '../components/NewPost'),
+        HomePosts: () => import(/* webpackChunckName: 'HomePosts' */ '../components/HomePosts'),
     },
     data(){
         return {

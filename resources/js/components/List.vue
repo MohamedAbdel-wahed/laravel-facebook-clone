@@ -1,9 +1,11 @@
 <template>
     <div class="w-72">
         <ul class="w-11/12 py-2 mx-3">
-            <li class="flex items-center my-2 px-10 py-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700">
-                <img src="/images/other/user.jpeg" class="w-8 h-8 rounded-full">
-                <span class="ml-2">John doe</span> 
+            <li class="my-2 px-10 py-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700">
+               <router-link :to="`/profile/${authUser.id}`" class="flex items-center">
+                   <img src="/images/other/user.jpeg" class="w-8 h-8 rounded-full">
+                   <span class="ml-2">John doe</span> 
+               </router-link>
             </li>
             <li class="flex items-center my-2 px-10 py-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700">
                 <img src="/images/svg/friends.svg" class="w-8 h-8 rounded-full">
@@ -34,12 +36,17 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
     name: 'List',
     data(){
         return {
 
         }
+    },
+    computed:{
+        ...mapState(['authUser'])
     }
 }
 </script>
