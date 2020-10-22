@@ -20,15 +20,13 @@
 
 <script>
 import {mapState} from 'vuex'
-import NewComment from './NewComment'
-import GetComments from './GetComments'
 
 export default {
     name: 'Comment',
     props:['postId'],
      components:{
-        NewComment,
-        GetComments
+        NewComment: ()=> import(/* webpackChunckName: "NewComment" */ './NewComment'),
+        GetComments: ()=> import(/* webpackChunckName: "GetComments" */ './GetComments')
     },
     data(){
         return {

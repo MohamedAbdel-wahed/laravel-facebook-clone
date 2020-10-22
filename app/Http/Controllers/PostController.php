@@ -28,7 +28,7 @@ class PostController extends Controller
 
           $post=auth()->user()->posts()->create($data);
           $post->user=auth()->user();
-          
+
         return response()->json($post);
     }
 
@@ -38,7 +38,7 @@ class PostController extends Controller
        return $post->toggleLike(auth()->user());
     }
 
-    
+
     public function checkIfLiked(Post $post)
     {
         $liked=$post->isLikedBy(auth()->user());
@@ -48,7 +48,7 @@ class PostController extends Controller
     public function getLikes(Post $post)
     {
        $ids= $post->likes->pluck('user_id');
-       $likers=User::whereIn('id',$ids)->select('fName','lName','current_photo')->get();
+       $likers=User::whereIn('id',$ids)->select('id','fName','lName','current_photo')->get();
        return response($likers);
     }
 }

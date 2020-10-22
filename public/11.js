@@ -49,30 +49,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/profile/Head */ "./resources/js/components/profile/Head.vue"));
     },
     Timeline: function Timeline() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/profile/Timeline */ "./resources/js/components/profile/Timeline.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/profile/Timeline */ "./resources/js/components/profile/Timeline.vue"));
     }
   },
   data: function data() {
     return {
+      peofileId: 0,
       profile_owner: {}
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['activeTab'])),
-  created: function created() {
-    var _this = this;
+  methods: {
+    getProfile: function getProfile() {
+      var _this = this;
 
-    var profileId = this.$route.params.id;
-    axios.get("/api/profile/".concat(profileId)).then(function (res) {
-      _this.profile_owner = res.data;
-    })["catch"](function (err) {
-      if ({
-        err: err
-      }.err.response.status) {
-        _this.$router.push({
-          name: 'NotFound'
-        });
-      }
-    });
+      this.profileId = this.$route.params.id;
+      axios.get("/api/profile/".concat(this.profileId)).then(function (res) {
+        _this.profile_owner = res.data;
+      })["catch"](function (err) {
+        if ({
+          err: err
+        }.err.response.status) {
+          _this.$router.push({
+            name: 'NotFound'
+          });
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.getProfile();
+  },
+  watch: {
+    $route: 'getProfile'
   }
 });
 

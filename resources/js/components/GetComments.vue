@@ -11,7 +11,7 @@
                   <div class="px-3 py-2 ml-1 bg-gray-100 rounded-lg">
                       <h1 class="flex items-center">
                           <router-link to="#" class="hover:underline">
-                             <span class="text-sm font-bold text-gray-800">{{ comment.user.name }}</span>
+                             <span class="text-sm font-bold text-gray-800">{{ comment.user.fName+' '+comment.user.lName }}</span>
                           </router-link>
                           <span class="ml-2 text-xs text-gray-500">{{ comment.created_at | formatTime }}</span>
                       </h1>

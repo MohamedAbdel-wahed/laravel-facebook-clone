@@ -2205,19 +2205,19 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Home',
   components: {
     List: function List() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/List */ "./resources/js/components/List.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/List */ "./resources/js/components/List.vue"));
     },
     Contacts: function Contacts() {
       return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/Contacts */ "./resources/js/components/Contacts.vue"));
     },
     Stories: function Stories() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/Stories */ "./resources/js/components/Stories.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/Stories */ "./resources/js/components/Stories.vue"));
     },
     NewPost: function NewPost() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/NewPost */ "./resources/js/components/NewPost.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/NewPost */ "./resources/js/components/NewPost.vue"));
     },
     HomePosts: function HomePosts() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/HomePosts */ "./resources/js/components/HomePosts.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../components/HomePosts */ "./resources/js/components/HomePosts.vue"));
     }
   },
   data: function data() {
@@ -38455,7 +38455,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     name: 'Profile',
     path: '/profile/:id',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../views/Profile */ "./resources/js/views/Profile.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../views/Profile */ "./resources/js/views/Profile.vue"));
     }
   }, {
     name: 'NotFound',
@@ -38486,7 +38486,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     authUser: {},
     posts: [],
     activeTab: 'timeline',
-    likes: [],
+    // likes:[],
     comments: []
   },
   getters: {},
@@ -38500,9 +38500,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     setActiveTab: function setActiveTab(state, payload) {
       state.activeTab = payload;
     },
-    getLikes: function getLikes(state, payload) {
-      state.likes = payload;
-    },
+    // getLikes(state,payload){
+    //   state.likes=payload
+    // },
     getComments: function getComments(state, payload) {
       state.comments = payload;
     }
@@ -38517,9 +38517,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     setActiveTab: function setActiveTab(context, payload) {
       context.commit('setActiveTab', payload);
     },
-    getLikes: function getLikes(context, payload) {
-      context.commit('getLikes', payload);
-    },
+    // getLikes(context,payload){
+    //   context.commit('getLikes',payload)
+    // },
     getComments: function getComments(context, payload) {
       context.commit('getComments', payload);
     }

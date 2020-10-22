@@ -22,8 +22,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $first_name=explode(' ',$this->faker->name)[0];
+        $last_name=explode(' ',$this->faker->name)[1];
+
         return [
-            'name' => $this->faker->name,
+            'fName' => $first_name,
+            'lName' => $last_name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => 'test1234', // password

@@ -9,16 +9,158 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'EditProfile',
-  props: ['authUser', 'profile_owner'],
+  name: "EditProfile",
+  props: ["authUser", "profile_owner"],
   data: function data() {
     return {
       showEditProfileModal: false,
-      name: '',
+      name: "",
       photo: null,
       cover: null,
-      bio: ''
+      bio: ""
     };
   },
   computed: {},
@@ -28,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var reader = new FileReader();
       reader.readAsDataURL(this.$refs.photo.files[0]);
-      reader.addEventListener('load', function (e) {
+      reader.addEventListener("load", function (e) {
         _this.photo = e.target.result;
       });
     },
@@ -37,7 +179,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var reader = new FileReader();
       reader.readAsDataURL(this.$refs.cover.files[0]);
-      reader.addEventListener('load', function (e) {
+      reader.addEventListener("load", function (e) {
         _this2.cover = e.target.result;
       });
     },
@@ -59,7 +201,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#edit_profile[data-v-70e78e3e]::-webkit-scrollbar {\r    width: 1px;\r    background-color: #F5F5F5;\n}\n#edit_profile[data-v-70e78e3e]::-webkit-scrollbar-track {\r    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\r    border-radius: 2px;\r    background-color: #F5F5F5;\n}\n#edit_profile[data-v-70e78e3e]::-webkit-scrollbar-thumb {\r    border-radius: 2px;\r    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);\r    background-color: #888;\n}\r", ""]);
+exports.push([module.i, "#edit_profile[data-v-70e78e3e]::-webkit-scrollbar {\n  width: 1px;\n  background-color: #f5f5f5;\n}\n#edit_profile[data-v-70e78e3e]::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n  border-radius: 2px;\n  background-color: #f5f5f5;\n}\n#edit_profile[data-v-70e78e3e]::-webkit-scrollbar-thumb {\n  border-radius: 2px;\n  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n  background-color: #888;\n}\n", ""]);
 
 // exports
 
@@ -124,7 +266,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Edit Profile")]
+          [_vm._v("\n        Edit Profile\n    ")]
         )
       : _vm._e(),
     _vm._v(" "),
@@ -174,7 +316,7 @@ var render = function() {
                 staticClass:
                   "my-4 text-4xl font-bold text-blue-900 text-center select-none"
               },
-              [_vm._v("Edit Profile Info")]
+              [_vm._v("\n            Edit Profile Info\n        ")]
             ),
             _vm._v(" "),
             _c(
@@ -405,7 +547,7 @@ var staticRenderFns = [
           staticClass:
             "px-6 py-2 text-white hover:text-blue-200 bg-blue-500 focus:outline-none focus:bg-blue-600 rounded-lg"
         },
-        [_vm._v("Save Changes")]
+        [_vm._v("\n                    Save Changes\n                ")]
       )
     ])
   }

@@ -1,1 +1,194 @@
-<template><div>  <button @click="showEditProfileModal=true" v-if="authUser.id==profile_owner.id" class="px-6 py-2 font-bold text-gray-800 text-sm bg-gray-200 tracking-wide hover:bg-gray-300 focus:outline-none rounded-lg">Edit Profile</button>  <button v-if="showEditProfileModal" @click="showEditProfileModal=false" class="w-full h-full fixed inset-0 bg-gray-500 opacity-25 z-30 cursor-default"></button>  <div v-if="showEditProfileModal" class="w-11/12 fixed top-0 mb-16 -ml-152 pt-3 pb-10 px-10 bg-white border border-gray-200 rounded-lg shadow-md z-30 h-screen overflow-auto" id="edit_profile">      <div @click="showEditProfileModal=false" class="float-right p-3 rounded-full hover:bg-gray-100 cursor-pointer">          <img src="/images/svg/close.svg" class="w-4 h-4 rounded-full">      </div>      <h1 class="my-4 text-4xl font-bold text-blue-900 text-center select-none">Edit Profile Info</h1>      <form @submit.prevent="SaveProfileChanges()" enctype="multipart/form-data">          <div class="flex items-center mx-56 mt-16 mb-8">              <label for="name" class="text-xl font-bold text-gray-800 tracking-wide select-none">Name</label>              <input type="text" name="name" v-model="name" class="w-5/12 ml-2 px-6 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-blue-300 rounded-lg" autocomplete="off" placeholder="Enter Your Name" >          </div>          <hr>          <div class="flex items-center mx-56 my-8 py-2 select-none">             <div class="w-1/2">                  <img :src="photo ? photo : `https://avatars.abstractapi.com/v1/?api_key=c0768a60a23c489b8d984c73f59dc568&name=${profile_owner.name}`" class="w-40 h-40 rounded-full">             </div>             <div class="w-1/2 relative ml-20">                 <label title="choose profile photo" class="w-9/12 h-12 absolute top-0 left-0 flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-md shadow-sm cursor-pointer">                      <img src="/images/svg/camera.svg" class="w-6 h-6">                      <span class="ml-2 text-gray-900 text-sm font-bold">Add Profile Photo</span>                 </label>                 <input type="file" name="photo" ref="photo" class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10" @change="selectPhoto">             </div>          </div>          <hr>          <div class="flex items-center mx-56 my-8 py-2 select-none">             <div class="w-1/2">                  <img :src="cover ? cover : '/images/other/cover.png'" class="w-72 h-40 rounded-lg">             </div>             <div class="w-1/2 relative ml-20">                 <label title="choose Cover Image" class="w-9/12 h-12 absolute top-0 left-0 flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-md shadow-sm cursor-pointer">                      <img src="/images/svg/camera.svg" class="w-6 h-6">                      <span class="ml-2 text-gray-900 text-sm font-bold">Add Cover Photo</span>                 </label>                 <input type="file" name="cover" ref="cover" class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10" @change="selectCover">             </div>          </div>          <hr>          <div class="flex mx-56 my-8">              <label for="bio" class="text-xl font-bold text-gray-800 tracking-wide select-none">Bio</label>              <textarea name="bio" rows="3" v-model="bio" class="w-2/3 ml-2 px-4 py-2 border border-gray-300 focus:border-blue-300 focus:outline-none rounded-lg" placeholder="Type something about you..."></textarea>          </div>          <div class="mt-16 text-center">            <button class="px-6 py-2 text-white hover:text-blue-200 bg-blue-500 focus:outline-none focus:bg-blue-600 rounded-lg">Save Changes</button>          </div>     </form>  </div></div></template><script>export default {    name:'EditProfile',    props:['authUser','profile_owner'],    data(){      return{        showEditProfileModal:false,        name:'',        photo:null,        cover:null,        bio:''      }    },    computed:{    },    methods:{      selectPhoto(){          const reader= new FileReader()          reader.readAsDataURL(this.$refs.photo.files[0])          reader.addEventListener('load', e=>{            this.photo=e.target.result          })      },      selectCover(){        const reader= new FileReader()          reader.readAsDataURL(this.$refs.cover.files[0])          reader.addEventListener('load', e=>{            this.cover=e.target.result          })      },      SaveProfileChanges(){              }    }}</script><style scoped>#edit_profile::-webkit-scrollbar {    width: 1px;    background-color: #F5F5F5;}#edit_profile::-webkit-scrollbar-track {    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);    border-radius: 2px;    background-color: #F5F5F5;}#edit_profile::-webkit-scrollbar-thumb {    border-radius: 2px;    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);    background-color: #888;}</style>
+<template>
+    <div>
+        <button
+            @click="showEditProfileModal = true"
+            v-if="authUser.id == profile_owner.id"
+            class="px-6 py-2 font-bold text-gray-800 text-sm bg-gray-200 tracking-wide hover:bg-gray-300 focus:outline-none rounded-lg"
+        >
+            Edit Profile
+        </button>
+        <button
+            v-if="showEditProfileModal"
+            @click="showEditProfileModal = false"
+            class="w-full h-full fixed inset-0 bg-gray-500 opacity-25 z-30 cursor-default"
+        ></button>
+        <div
+            v-if="showEditProfileModal"
+            class="w-11/12 fixed top-0 mb-16 -ml-152 pt-3 pb-10 px-10 bg-white border border-gray-200 rounded-lg shadow-md z-30 h-screen overflow-auto"
+            id="edit_profile"
+        >
+            <div
+                @click="showEditProfileModal = false"
+                class="float-right p-3 rounded-full hover:bg-gray-100 cursor-pointer"
+            >
+                <img src="/images/svg/close.svg" class="w-4 h-4 rounded-full" />
+            </div>
+            <h1
+                class="my-4 text-4xl font-bold text-blue-900 text-center select-none"
+            >
+                Edit Profile Info
+            </h1>
+
+            <form
+                @submit.prevent="SaveProfileChanges()"
+                enctype="multipart/form-data"
+            >
+                <div class="flex items-center mx-56 mt-16 mb-8">
+                    <label
+                        for="name"
+                        class="text-xl font-bold text-gray-800 tracking-wide select-none"
+                        >Name</label
+                    >
+                    <input
+                        type="text"
+                        name="name"
+                        v-model="name"
+                        class="w-5/12 ml-2 px-6 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-blue-300 rounded-lg"
+                        autocomplete="off"
+                        placeholder="Enter Your Name"
+                    />
+                </div>
+
+                <hr />
+
+                <div class="flex items-center mx-56 my-8 py-2 select-none">
+                    <div class="w-1/2">
+                        <img
+                            :src="
+                                photo
+                                    ? photo
+                                    : `https://avatars.abstractapi.com/v1/?api_key=c0768a60a23c489b8d984c73f59dc568&name=${profile_owner.name}`
+                            "
+                            class="w-40 h-40 rounded-full"
+                        />
+                    </div>
+                    <div class="w-1/2 relative ml-20">
+                        <label
+                            title="choose profile photo"
+                            class="w-9/12 h-12 absolute top-0 left-0 flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-md shadow-sm cursor-pointer"
+                        >
+                            <img src="/images/svg/camera.svg" class="w-6 h-6" />
+                            <span class="ml-2 text-gray-900 text-sm font-bold"
+                                >Add Profile Photo</span
+                            >
+                        </label>
+                        <input
+                            type="file"
+                            name="photo"
+                            ref="photo"
+                            class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10"
+                            @change="selectPhoto"
+                        />
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="flex items-center mx-56 my-8 py-2 select-none">
+                    <div class="w-1/2">
+                        <img
+                            :src="cover ? cover : '/images/other/cover.png'"
+                            class="w-72 h-40 rounded-lg"
+                        />
+                    </div>
+                    <div class="w-1/2 relative ml-20">
+                        <label
+                            title="choose Cover Image"
+                            class="w-9/12 h-12 absolute top-0 left-0 flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-md shadow-sm cursor-pointer"
+                        >
+                            <img src="/images/svg/camera.svg" class="w-6 h-6" />
+                            <span class="ml-2 text-gray-900 text-sm font-bold"
+                                >Add Cover Photo</span
+                            >
+                        </label>
+                        <input
+                            type="file"
+                            name="cover"
+                            ref="cover"
+                            class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10"
+                            @change="selectCover"
+                        />
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="flex mx-56 my-8">
+                    <label
+                        for="bio"
+                        class="text-xl font-bold text-gray-800 tracking-wide select-none"
+                        >Bio</label
+                    >
+                    <textarea
+                        name="bio"
+                        rows="3"
+                        v-model="bio"
+                        class="w-2/3 ml-2 px-4 py-2 border border-gray-300 focus:border-blue-300 focus:outline-none rounded-lg"
+                        placeholder="Type something about you..."
+                    ></textarea>
+                </div>
+
+                <div class="mt-16 text-center">
+                    <button
+                        class="px-6 py-2 text-white hover:text-blue-200 bg-blue-500 focus:outline-none focus:bg-blue-600 rounded-lg"
+                    >
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "EditProfile",
+    props: ["authUser", "profile_owner"],
+    data() {
+        return {
+            showEditProfileModal: false,
+            name: "",
+            photo: null,
+            cover: null,
+            bio: ""
+        };
+    },
+    computed: {},
+    methods: {
+        selectPhoto() {
+            const reader = new FileReader();
+            reader.readAsDataURL(this.$refs.photo.files[0]);
+            reader.addEventListener("load", e => {
+                this.photo = e.target.result;
+            });
+        },
+        selectCover() {
+            const reader = new FileReader();
+            reader.readAsDataURL(this.$refs.cover.files[0]);
+            reader.addEventListener("load", e => {
+                this.cover = e.target.result;
+            });
+        },
+        SaveProfileChanges() {}
+    }
+};
+</script>
+
+<style scoped>
+#edit_profile::-webkit-scrollbar {
+    width: 1px;
+    background-color: #f5f5f5;
+}
+
+#edit_profile::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #f5f5f5;
+}
+
+#edit_profile::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #888;
+}
+</style>

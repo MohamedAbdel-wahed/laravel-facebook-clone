@@ -4,10 +4,7 @@
         <Info />
     </div>
     <div :class="[ posts.length > 1 ? ['h-135' ,'overflow-x-hidden','overflow-y-scroll'] : '' ]" class="w-7/12 ml-4" id='profile_posts'>
-        <div v-if="authUser.id==profile_owner.id">
-            <NewPost />
-        </div>
-        <Posts />
+        <Posts :profileOwner="profile_owner"/>
     </div>
 </div>
 </template>
@@ -19,9 +16,8 @@ export default {
     name: 'Timeline',
     props:['profile_owner'],
     components:{
-        NewPost: () => import(/* webpackChunckName: 'NewPost' */ '../NewPost'),
-        Posts: () => import(/* webpackChunckName: 'Posts' */ './Posts'), 
-        Info: () => import(/* webpackChunckName: 'Info' */ './Info') 
+        Posts: () => import(/* webpackChunckName: "Posts" */ './Posts'),
+        Info: () => import(/* webpackChunckName: "Info" */ './Info')
     },
     data(){
         return{
@@ -30,8 +26,7 @@ export default {
     },
     computed:{
        ...mapState([
-         'posts',
-         'authUser'
+         'posts'
       ])
     }
 }

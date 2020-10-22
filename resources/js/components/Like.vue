@@ -23,18 +23,21 @@ export default {
       ])
     },
     mounted(){
-        axios.get(`/api/posts/${this.postId}/like-status`)
-             .then(res=>{
-                 this.liked=res.data
-                 this.likeIcon= this.liked ? 'liked.svg' : 'like.svg'
-             }).catch(err=> console.log(err))
+      this.getLikeStatus()
     },
     methods:{
+        getLikeStatus(){
+          axios.get(`/api/posts/${this.postId}/like-status`)
+               .then(res=>{
+                   this.liked=res.data ? true : false
+                   this.likeIcon= this.liked ? 'liked.svg' : 'like.svg'
+               }).catch(err=> console.log(err))
+        },
         likePost(postId){
             axios.post(`/api/posts/${postId}/like`)
                  .then(res=>{
+                     this.liked=!this.liked
                      this.likeIcon= this.liked ? 'liked.svg' : 'like.svg'
-            this.liked=!this.liked
                  }).catch(err=>console.log(err))
         },
     }

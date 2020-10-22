@@ -1,8 +1,11 @@
 <template>
 <div>
+  <div v-if="authUser.id==profileOwner.id">
+      <NewPost />
+  </div>
   <div v-if="posts.length>0">
-    <div v-for="(post,index) in posts" :key="index" class="relative mt-3">
-        <div v-if="authUser.id===post.user.id"  class="px-4 py-2 bg-white border border-gray-200 rounded-lg">
+    <div v-for="(post,index) in posts" :key="post.id" class="relative mt-3">
+        <div v-if="profileOwner.id===post.user.id"  class="px-4 py-2 bg-white border border-gray-200 rounded-lg">
             <div @click="showPostOptionsModal=!showPostOptionsModal" class=" float-right hover:bg-gray-100 focus:bg-gray-200 cursor-pointer px-3 py-1 rounded-full">
                 <img src="/images/svg/more.svg" class="w-6 h-6">
             </div>
@@ -25,13 +28,13 @@
                 </li>
             </ul>
             <div class="W-7/12 flex items-center">
-                <router-link to="#">
-                    <img :src="`https://avatars.abstractapi.com/v1/?api_key=c0768a60a23c489b8d984c73f59dc568&name=${post.user.fName} ${post.user.lName}`" class="w-10 h-10 rounded-full">
+                <router-link to="#" class="border border-gray-200 rounded-full">
+                    <img :src="post.user.current_photo ? `/storage/${post.user.current_photo}` : '/images/svg/default-male.svg'" class="border border-gray-300 w-10 h-10 rounded-full">
                 </router-link>
                 <div class="ml-2 flex flex-col">
                     <router-link to="#" class="hover:underline">
                         <h1 class="text-gray-800 font-bold text-sm">{{`${post.user.fName} ${post.user.lName}`}}</h1>
-                    </router-link> 
+                    </router-link>
                     <div class="flex items-center">
                         <p class="text-gray-500 text-xs">{{ post.created_at | formatTime }}</p>
                         <img :src="`/images/svg/${post.privacy}.svg`" class="ml-2 w-4 h-4 rounded-full">
@@ -62,26 +65,25 @@
                 </div>
             </div>
         </div>
+        <div v-else>
+            <h1 class="text-3xl text-gray-600 font-extrabold text-center my-32 tracking-wide">No Posts Yet</h1>
+        </div>
     </div>
-  </div>
-  <div v-else>
-      <h1 class="text-3xl text-gray-600 font-extrabold text-center my-32 tracking-wide">No Posts Found</h1>
   </div>
 </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
-import Like from '../Like'
-import GetLikes from '../GetLikes'
-import Comment from '../Comment'
 
 export default {
       name: 'Posts',
+      props:['profileOwner'],
       components:{
-          Like,
-          GetLikes,
-          Comment
+          NewPost: () => import(/* webpackChunckName: "NewPost" */ '../NewPost'),
+          Like: () => import(/* webpackChunckName: "Like" */ '../Like'),
+          GetLikes: () => import(/* webpackChunckName: "GetLikes" */ '../GetLikes'),
+          Comment: () => import(/* webpackChunckName: "Comment" */ '../Comment')
       },
       data(){
           return {
@@ -93,13 +95,12 @@ export default {
           }
       },
       computed:{
-          ...mapState([
-            'authUser'
-          ])
+        ...mapState(['authUser'])
       },
       mounted(){
           axios.get('/api/posts')
                .then(res=>{
+                 console.log(res.data)
                    this.posts=res.data
                    this.$store.dispatch('allPosts', res.data)
                })

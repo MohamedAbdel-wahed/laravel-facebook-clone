@@ -34,6 +34,7 @@ export default {
     },
     data(){
         return{
+          peofileId:0,
           profile_owner:{},
         }
     },
@@ -42,17 +43,42 @@ export default {
             'activeTab',
           ])
     },
+    methods:{
+      getProfile(){
+        this.profileId=this.$route.params.id
+        axios.get(`/api/profile/${this.profileId}`)
+             .then(res=>{
+               this.profile_owner=res.data
+             }).catch(err=>{
+                if({err}.err.response.status){
+                  this.$router.push({name:'NotFound'})
+                }
+             })
+      }
+    },
     created(){
-      let profileId=this.$route.params.id
-      axios.get(`/api/profile/${profileId}`)
-           .then(res=>{
-             this.profile_owner=res.data
-           }).catch(err=>{
-              if({err}.err.response.status){
-                this.$router.push({name:'NotFound'})
-              }
-           })
+       this.getProfile()
+    },
+    watch:{
+      $route:'getProfile'
     }
-
 }
 </script>
+
+#profile::-webkit-scrollbar {
+    width: 1px;
+    background-color: #F5F5F5;
+}
+
+#profile::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 2px;
+    background-color: #F5F5F5;
+}
+
+#profile::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #888;
+}
+</style>

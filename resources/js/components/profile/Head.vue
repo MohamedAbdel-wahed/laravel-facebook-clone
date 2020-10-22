@@ -2,8 +2,8 @@
  <div class="px-56 bg-white">
     <div class="relative w-full shadow-md">
         <img class="w-full h-84 rounded-lg z-10" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAsHCBUIBwUKCRUMBQUFBQ8GBQUFDxYMDQgPGxcdHRsXGhkgJTMpICIvIxkaKj4rLzU3Ojs6HihBRkA4RjM5OjcBDAwMBQUFFAYGFDchGiE3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAM0A9gMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAAAgEH/8QAFRABAQAAAAAAAAAAAAAAAAAAABH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AOmDRBg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0Bg0BoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKUGjKAmlRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSguiKAylRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSgulRSguiK0E0qKUVdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdEUBlKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdKilBdEVoJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//2Q==">
-        <div class="absolute top-0 left-0 transform translate-x-96 translate-y-48 border-4 border-white rounded-full">
-            <img src="/images/other/user.jpeg" class="w-40 h-40 rounded-full">
+        <div class="absolute top-0 left-0 transform translate-x-96 translate-y-48 bg-white border-4 border-white rounded-full">
+            <img src="/images/svg/default-male.svg" class="w-40 h-40 rounded-full">
             <button class="absolute inset-0 w-full h-full z-10 bg-gray-800 opacity-0 hover:opacity-25 hover:shadow-sm rounded-full cursor-pointer transition-all duration-300 ease-out focus:outline-none"></button>
         </div>
         <label for="photo" class="absolute top-0 left-0 transform translate-x-115 translate-y-72 mt-4 p-2 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-full">

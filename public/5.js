@@ -27,28 +27,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Timeline',
   props: ['profile_owner'],
   components: {
-    NewPost: function NewPost() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../NewPost */ "./resources/js/components/NewPost.vue"));
-    },
     Posts: function Posts() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./Posts */ "./resources/js/components/profile/Posts.vue"));
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./Posts */ "./resources/js/components/profile/Posts.vue"));
     },
     Info: function Info() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./Info */ "./resources/js/components/profile/Info.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./Info */ "./resources/js/components/profile/Info.vue"));
     }
   },
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['posts', 'authUser']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['posts']))
 });
 
 /***/ }),
@@ -131,13 +125,7 @@ var render = function() {
         ],
         attrs: { id: "profile_posts" }
       },
-      [
-        _vm.authUser.id == _vm.profile_owner.id
-          ? _c("div", [_c("NewPost")], 1)
-          : _vm._e(),
-        _vm._v(" "),
-        _c("Posts")
-      ],
+      [_c("Posts", { attrs: { profileOwner: _vm.profile_owner } })],
       1
     )
   ])
