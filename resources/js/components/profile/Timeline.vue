@@ -3,7 +3,7 @@
     <div class="w-5/12 mr-2 h-135">
         <Info />
     </div>
-    <div :class="[ posts.length > 1 ? ['h-135' ,'overflow-x-hidden','overflow-y-scroll'] : '' ]" class="w-7/12 ml-4" id='profile_posts'>
+    <div :class="[ posts.length > 1 ? ['h-135' ,'overflow-auto'] : '' ]" class="w-7/12 ml-4 pb-12" id='profile_posts'>
         <Posts :profileOwner="profile_owner"/>
     </div>
 </div>

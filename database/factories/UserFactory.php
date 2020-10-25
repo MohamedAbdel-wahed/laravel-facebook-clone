@@ -26,8 +26,8 @@ class UserFactory extends Factory
         $last_name=explode(' ',$this->faker->name)[1];
 
         return [
-            'fName' => $first_name,
-            'lName' => $last_name,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => 'test1234', // password

@@ -17,11 +17,11 @@
 
                     <div class="w-full flex">
                         <div class="w-1/2 flex flex-wrap">
-                            <label for="fName" class="block text-gray-700 text-sm font-bold mb-1">First Name:</label>
+                            <label for="first_name" class="block text-gray-700 text-sm font-bold mb-1">First Name:</label>
 
-                            <input id="fName" type="text" class="form-input w-full @error('fName')  border-red-500 @enderror" name="fName" value="{{ old('fName') }}" required autocomplete="off" autofocus>
+                            <input id="first_name" type="text" class="form-input w-full @error('first_name')  border-red-500 @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="off" autofocus>
 
-                            @error('fName')
+                            @error('first_name')
                             <p class="text-red-500 text-xs italic mt-4">
                                 {{ $message }}
                             </p>
@@ -29,11 +29,11 @@
                         </div>
 
                         <div class="w-1/2 flex flex-wrap ml-3">
-                            <label for="lName" class="block text-gray-700 text-sm font-bold mb-1">Last Name:</label>
+                            <label for="last_name" class="block text-gray-700 text-sm font-bold mb-1">Last Name:</label>
 
-                            <input id="lName" type="text" class="form-input w-full @error('lName')  border-red-500 @enderror" name="lName" value="{{ old('lName') }}" required autocomplete="off" autofocus>
+                            <input id="last_name" type="text" class="form-input w-full @error('last_name')  border-red-500 @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="off" autofocus>
 
-                            @error('lName')
+                            @error('last_name')
                             <p class="text-red-500 text-xs italic mt-4">
                                 {{ $message }}
                             </p>

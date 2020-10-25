@@ -73,30 +73,111 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'NewPost',
+  name: "NewPost",
   data: function data() {
     return {
       showCreatePostModal: false,
-      privacy: 'public',
-      content: '',
+      privacy: "public",
+      content: "",
       route: location.pathname
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['posts'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["authUser", "posts"])),
   methods: {
     createPost: function createPost() {
       var _this = this;
 
       if (this.content.trim()) {
-        axios.post('/api/posts/create', {
+        axios.post("/api/posts/create", {
           privacy: this.privacy,
           content: this.content
         }).then(function (res) {
           _this.posts.unshift(res.data);
 
-          _this.content = '';
+          _this.content = "";
           _this.showCreatePostModal = false;
         })["catch"](function (err) {
           return console.log(err);
@@ -134,7 +215,11 @@ var render = function() {
         _c("router-link", { attrs: { to: "#" } }, [
           _c("img", {
             staticClass: "h-10 w-12 rounded-full",
-            attrs: { src: "/images/other/user.jpeg" }
+            attrs: {
+              src: _vm.authUser.photo
+                ? "/storage/uploads/profile/" + _vm.authUser.photo
+                : "/images/svg/default-male.svg"
+            }
           })
         ]),
         _vm._v(" "),
@@ -199,7 +284,7 @@ var render = function() {
               {
                 staticClass: "my-2 text-center text-2xl font-bold text-gray-800"
               },
-              [_vm._v("Create Post")]
+              [_vm._v("\n            Create Post\n        ")]
             ),
             _vm._v(" "),
             _c("hr"),
@@ -333,7 +418,7 @@ var render = function() {
                           ]
                     ]
                   },
-                  [_vm._v("Post")]
+                  [_vm._v("\n                Post\n            ")]
                 )
               ]
             )
@@ -356,7 +441,9 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "w-1/2" }, [
           _c("h1", { staticClass: "font-bold text-sm text-gray-700" }, [
-            _vm._v("Add to Your Post")
+            _vm._v(
+              "\n                        Add to Your Post\n                    "
+            )
           ])
         ]),
         _vm._v(" "),

@@ -42,9 +42,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'GetLikes',
-  props: ['postId'],
+  name: "GetLikes",
+  props: ["postId"],
   data: function data() {
     return {
       users: [],
@@ -53,13 +112,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.getLikes();
+  },
+  methods: {
+    getLikes: function getLikes() {
+      var _this = this;
 
-    axios.get("/api/posts/".concat(this.postId, "/likes")).then(function (res) {
-      _this.users = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
+      axios.get("/api/posts/".concat(this.postId, "/likes")).then(function (res) {
+        _this.users = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
+  watch: {
+    users: "getLikes"
   }
 });
 
@@ -77,7 +144,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#post_likes[data-v-10e78c71]::-webkit-scrollbar {\n  width: 1px;\n  background-color: #F5F5F5;\n}\n#post_likes[data-v-10e78c71]::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n  border-radius: 2px;\n  background-color: #F5F5F5;\n}\n#post_likes[data-v-10e78c71]::-webkit-scrollbar-thumb {\n  border-radius: 2px;\n  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);\n  background-color: #888;\n}\n\n\n", ""]);
+exports.push([module.i, "#post_likes[data-v-10e78c71]::-webkit-scrollbar {\n  width: 1px;\n  background-color: #f5f5f5;\n}\n#post_likes[data-v-10e78c71]::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n  border-radius: 2px;\n  background-color: #f5f5f5;\n}\n#post_likes[data-v-10e78c71]::-webkit-scrollbar-thumb {\n  border-radius: 2px;\n  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n  background-color: #888;\n}\n", ""]);
 
 // exports
 
@@ -166,7 +233,7 @@ var render = function() {
           },
           [
             _vm._l(_vm.users, function(user, index) {
-              return index < 4
+              return index < 3
                 ? _c(
                     "div",
                     { key: index, staticClass: "flex items-center my-1" },
@@ -175,20 +242,22 @@ var render = function() {
                         staticClass:
                           "border border-gray-600 w-4 h-4 rounded-full",
                         attrs: {
-                          src: user.current_photo
-                            ? "/storage/" + user.current_photo
+                          src: user.photo
+                            ? "/storage/" + user.photo
                             : "/images/svg/default-male.svg"
                         }
                       }),
                       _vm._v(" "),
                       _c("h1", { staticClass: "ml-1 text-white text-xs" }, [
                         _vm._v(
-                          _vm._s(
-                            _vm._f("strLimit")(
-                              user.fName + " " + user.lName,
-                              17
-                            )
-                          )
+                          "\n                " +
+                            _vm._s(
+                              _vm._f("strLimit")(
+                                user.fName + " " + user.lName,
+                                17
+                              )
+                            ) +
+                            "\n            "
                         )
                       ])
                     ]
@@ -196,11 +265,17 @@ var render = function() {
                 : _vm._e()
             }),
             _vm._v(" "),
-            _vm.users.length > 4
+            _vm.users.length > 3
               ? _c(
                   "h3",
                   { staticClass: "mx-2 my-1 text-white text-xs font-semibold" },
-                  [_vm._v("and " + _vm._s(_vm.users.length - 4) + " others")]
+                  [
+                    _vm._v(
+                      "\n            and " +
+                        _vm._s(_vm.users.length - 3) +
+                        " others\n        "
+                    )
+                  ]
                 )
               : _vm._e()
           ],
@@ -275,8 +350,8 @@ var render = function() {
                           staticClass:
                             "border border-gray-300 w-8 h-8 rounded-full",
                           attrs: {
-                            src: user.current_photo
-                              ? "/storage/" + user.current_photo
+                            src: user.photo
+                              ? "/storage/" + user.photo
                               : "/images/svg/default-male.svg"
                           }
                         }),
@@ -289,12 +364,14 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              _vm._s(
-                                _vm._f("strLimit")(
-                                  user.fName + " " + user.lName,
-                                  19
-                                )
-                              )
+                              "\n                    " +
+                                _vm._s(
+                                  _vm._f("strLimit")(
+                                    user.fName + " " + user.lName,
+                                    19
+                                  )
+                                ) +
+                                "\n                "
                             )
                           ]
                         )
@@ -305,7 +382,9 @@ var render = function() {
                 )
               : _c("div", { staticClass: "text-center my-4" }, [
                   _c("h1", { staticClass: "text-gray-500 font-bold" }, [
-                    _vm._v("No one liked this post yet")
+                    _vm._v(
+                      "\n                No one liked this post yet\n            "
+                    )
                   ])
                 ])
           ]

@@ -19,7 +19,7 @@ export default {
     },
     computed:{
       ...mapState([
-        'authUser'
+        'authUser',
       ])
     },
     mounted(){
@@ -39,7 +39,7 @@ export default {
                      this.liked=!this.liked
                      this.likeIcon= this.liked ? 'liked.svg' : 'like.svg'
                  }).catch(err=>console.log(err))
-        },
+        }
     }
 }
 </script>

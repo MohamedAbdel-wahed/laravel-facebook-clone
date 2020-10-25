@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/profile/{user}', 'ProfileController@show');
+Route::patch('/profile/{user}/edit', 'ProfileController@update');
+
 
 
 

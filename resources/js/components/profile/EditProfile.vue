@@ -1,3 +1,22 @@
+<style scoped>
+#edit_profile::-webkit-scrollbar {
+    width: 1px;
+    background-color: #f5f5f5;
+}
+
+#edit_profile::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #f5f5f5;
+}
+
+#edit_profile::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #888;
+}
+</style>
+
 <template>
     <div>
         <button
@@ -29,23 +48,36 @@
                 Edit Profile Info
             </h1>
 
-            <form
-                @submit.prevent="SaveProfileChanges()"
-                enctype="multipart/form-data"
-            >
+            <form @submit.prevent="saveChanges" enctype="multipart/form-data">
                 <div class="flex items-center mx-56 mt-16 mb-8">
                     <label
-                        for="name"
-                        class="text-xl font-bold text-gray-800 tracking-wide select-none"
-                        >Name</label
+                        for="first_name"
+                        class="text-lg font-bold text-gray-800 tracking-wide select-none"
+                        >First Name:</label
                     >
                     <input
                         type="text"
-                        name="name"
-                        v-model="name"
-                        class="w-5/12 ml-2 px-6 py-3 text-gray-700 border border-gray-300 focus:outline-none focus:border-blue-300 rounded-lg"
+                        name="first_name"
+                        v-model="fName"
+                        class="w-5/12 ml-2 px-6 py-2 text-sm text-gray-700 border border-gray-300 focus:outline-none focus:border-blue-300 rounded-lg"
                         autocomplete="off"
-                        placeholder="Enter Your Name"
+                        placeholder="Enter Your First Name"
+                    />
+                </div>
+
+                <div class="flex items-center mx-56 mt-8 mb-8">
+                    <label
+                        for="last_name"
+                        class="text-lg font-bold text-gray-800 tracking-wide select-none"
+                        >Last Name:</label
+                    >
+                    <input
+                        type="text"
+                        name="last_name"
+                        v-model="lName"
+                        class="w-5/12 ml-2 px-6 py-2 text-sm text-gray-700 border border-gray-300 focus:outline-none focus:border-blue-300 rounded-lg"
+                        autocomplete="off"
+                        placeholder="Enter Your Last Name"
                     />
                 </div>
 
@@ -54,12 +86,22 @@
                 <div class="flex items-center mx-56 my-8 py-2 select-none">
                     <div class="w-1/2">
                         <img
+                            v-if="profile_owner.photo"
                             :src="
-                                photo
-                                    ? photo
-                                    : `https://avatars.abstractapi.com/v1/?api_key=c0768a60a23c489b8d984c73f59dc568&name=${profile_owner.name}`
+                                photoPreview
+                                    ? photoPreview
+                                    : `/storage/uploads/profile/${profile_owner.photo}`
                             "
                             class="w-40 h-40 rounded-full"
+                        />
+                        <img
+                            v-else
+                            :src="
+                                photoPreview
+                                    ? photoPreview
+                                    : '/images/svg/default-male.svg'
+                            "
+                            class="w-40 h-40 rounded-full border border-gray-200"
                         />
                     </div>
                     <div class="w-1/2 relative ml-20">
@@ -69,13 +111,12 @@
                         >
                             <img src="/images/svg/camera.svg" class="w-6 h-6" />
                             <span class="ml-2 text-gray-900 text-sm font-bold"
-                                >Add Profile Photo</span
+                                >Edit Profile Photo</span
                             >
                         </label>
                         <input
                             type="file"
                             name="photo"
-                            ref="photo"
                             class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10"
                             @change="selectPhoto"
                         />
@@ -87,7 +128,21 @@
                 <div class="flex items-center mx-56 my-8 py-2 select-none">
                     <div class="w-1/2">
                         <img
-                            :src="cover ? cover : '/images/other/cover.png'"
+                            v-if="profile_owner.cover"
+                            :src="
+                                coverPreview
+                                    ? coverPreview
+                                    : `/storage/uploads/cover/${profile_owner.cover}`
+                            "
+                            class="w-72 h-40 rounded-lg"
+                        />
+                        <img
+                            v-else
+                            :src="
+                                coverPreview
+                                    ? coverPreview
+                                    : '/images/other/cover.png'
+                            "
                             class="w-72 h-40 rounded-lg"
                         />
                     </div>
@@ -98,13 +153,12 @@
                         >
                             <img src="/images/svg/camera.svg" class="w-6 h-6" />
                             <span class="ml-2 text-gray-900 text-sm font-bold"
-                                >Add Cover Photo</span
+                                >Edit Cover Photo</span
                             >
                         </label>
                         <input
                             type="file"
                             name="cover"
-                            ref="cover"
                             class="w-9/12 h-12 absolute top-0 left-0 px-6 py-3 opacity-0 z-10"
                             @change="selectCover"
                         />
@@ -147,48 +201,55 @@ export default {
     data() {
         return {
             showEditProfileModal: false,
-            name: "",
+            photoPreview: null,
+            coverPreview: null,
+            fName: this.profile_owner.first_name,
+            lName: this.profile_owner.last_name,
+            bio: this.profile_owner.bio,
             photo: null,
-            cover: null,
-            bio: ""
+            cover: null
         };
     },
-    computed: {},
     methods: {
-        selectPhoto() {
+        selectPhoto(e) {
+            this.photo = e.target.files[0];
             const reader = new FileReader();
-            reader.readAsDataURL(this.$refs.photo.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
             reader.addEventListener("load", e => {
-                this.photo = e.target.result;
+                this.photoPreview = e.target.result;
             });
         },
-        selectCover() {
+        selectCover(e) {
+            this.cover = e.target.files[0];
             const reader = new FileReader();
-            reader.readAsDataURL(this.$refs.cover.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
             reader.addEventListener("load", e => {
-                this.cover = e.target.result;
+                this.coverPreview = e.target.result;
             });
         },
-        SaveProfileChanges() {}
+        saveChanges() {
+            const config = {
+                headers: { "content-type": "multipart/form-data" }
+            };
+
+            let formData = new FormData();
+            formData.append("_method", "PATCH");
+            formData.append("first_name", this.fName);
+            formData.append("last_name", this.lName);
+            formData.append("bio", this.bio);
+            this.photo ? formData.append("photo", this.photo) : "";
+            this.cover ? formData.append("cover", this.cover) : "";
+
+            axios
+                .post(`/api/profile/${this.authUser.id}/edit`, formData, config)
+                .then(res => {
+                    console.log(res.data);
+                    this.photo = this.cover = null;
+                    this.showEditProfileModal = false;
+                    window.scrollTo(0, 0);
+                })
+                .catch(err => console.log({ err }.err.response.data.errors));
+        }
     }
 };
 </script>
-
-<style scoped>
-#edit_profile::-webkit-scrollbar {
-    width: 1px;
-    background-color: #f5f5f5;
-}
-
-#edit_profile::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-    background-color: #f5f5f5;
-}
-
-#edit_profile::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #888;
-}
-</style>
