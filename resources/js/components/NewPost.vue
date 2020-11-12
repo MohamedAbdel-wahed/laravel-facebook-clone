@@ -10,7 +10,7 @@
                             ? `/storage/uploads/profile/${authUser.photo}`
                             : '/images/svg/default-male.svg'
                     "
-                    class="h-10 w-12 rounded-full"
+                    class="h-10 w-12 rounded-full border border-gray-200"
                 />
             </router-link>
             <input

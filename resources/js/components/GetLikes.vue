@@ -14,7 +14,7 @@
         </div>
         <div
             v-if="showSomeLikesModal"
-            class="absolute top-0 mt-40 transform -translate-y-4 w-48 max-h-56 py-2 px-4 bg-gray-800 rounded-lg z-10"
+            class="absolute top-0 mt-36 w-48 max-h-56 py-2 px-4 bg-gray-800 rounded-lg z-10"
         >
             <div
                 class="flex items-center my-1"
@@ -25,13 +25,15 @@
                 <img
                     :src="
                         user.photo
-                            ? `/storage/${user.photo}`
+                            ? `/storage/uploads/profile/${user.photo}`
                             : '/images/svg/default-male.svg'
                     "
                     class="border border-gray-600 w-4 h-4 rounded-full"
                 />
                 <h1 class="ml-1 text-white text-xs">
-                    {{ (user.fName + " " + user.lName) | strLimit(17) }}
+                    {{
+                        (user.first_name + " " + user.last_name) | strLimit(17)
+                    }}
                 </h1>
             </div>
             <h3
@@ -71,13 +73,16 @@
                     <img
                         :src="
                             user.photo
-                                ? `/storage/${user.photo}`
+                                ? `/storage/uploads/profile/${user.photo}`
                                 : '/images/svg/default-male.svg'
                         "
                         class="border border-gray-300 w-8 h-8 rounded-full"
                     />
                     <h1 class="ml-1 text-gray-800 text-sm font-semibold">
-                        {{ (user.fName + " " + user.lName) | strLimit(19) }}
+                        {{
+                            (user.first_name + " " + user.last_name)
+                                | strLimit(19)
+                        }}
                     </h1>
                 </router-link>
             </div>

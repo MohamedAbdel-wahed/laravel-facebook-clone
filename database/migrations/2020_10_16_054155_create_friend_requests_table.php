@@ -17,7 +17,6 @@ class CreateFriendRequestsTable extends Migration
             $table->id();
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reciever_id')->constrained('users')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

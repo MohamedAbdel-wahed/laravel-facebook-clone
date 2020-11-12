@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
 use App\Models\Like;
 use App\Models\Comment;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class User extends Authenticatable
@@ -25,70 +25,83 @@ class User extends Authenticatable
 
     /*  Friend System  */
 
-   public function friending($user)
-   {
-     DB::table('friend_requests')->insert([
-         'sender_id'=>$this->id,
-         'reciever_id'=>$user->id
-      ]);
-
-     return "request sent successfully";
-   }
-
-    public function friend_requests()
+    public function isPending($user)
     {
-       return $this->belongsToMany(User::class,'friend_requests','reciever_id','sender_id')->withTimestamps();
+      return $this->requests()->where('reciever_id', $user->id)->exists();
     }
 
-    public function accept_friendship($user)
+    public function isFriend($user)
     {
-      DB::table('friend_requests')->where('sender_id',$user->id)->delete();
-
-        DB::table('friends')->insert([
-            'user_id'=>$this->id,
-            'friend_id'=>$user->id
-         ]);
-
-        return "You just accepted user $user->id request";
+      return $this->friends()->where('friend_id', $user->id)->exists();
     }
 
-    public function reject_friendship($user)
-    {
-        DB::table('friend_requests')->where('sender_id',$user->id)->delete();
 
-        return 'request has been rejected or the user deleted the request';
+    public function send_request($user)
+    {
+        if($user->isFriend($this) || $this->isFriend($user)){
+          return 'already friend';
+        }
+        elseif($this->isPending($user) || $user->isPending($this)) {
+          $this->requests()->detach($user);
+        }
+        else{
+          $this->requests()->attach($user);
+        }             
     }
+
+
+    public function requests()
+    {
+        return $this->belongsToMany(User::class,'friend_requests','sender_id', 'reciever_id');
+    }
+
+
+    public function accept_request($user)
+    {
+      if($user->isPending($this) && !$user->isFriend($this)){
+          $user->requests()->detach($this);
+          $this->friends()->attach($user);
+        }
+    }
+
+
+    public function reject_request($user)
+    {
+      if($user->isPending($this)) {
+          $user->requests()->detach($this);
+        }
+    }
+
 
     public function friends()
     {
-      return $this->belongsToMany(User::class,'friends','user_id','friend_id')->withTimestamps();
-    }
-
-    public function end_friendship($user)
-    {
-       DB::table('friends')->where('friend_id',$user->id)->orWhere('friend_id',$this->id)->delete();
-      return "You ended you relationship with user $user->id";
+      return $this->belongsToMany(User::class,'friends','user_id','friend_id');
     }
 
 
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-
-
-    public function like()
-    {
-        return $this->hasOne(Like::class);
-    }
+   public function remove_friend($user)
+   {
+       if($this->isFriend($user)){
+          DB::table('friends')->where('friend_id',$user->id)->orWhere('friend_id',$this->id)->delete();
+       }
+   }
 
 
+   public function posts()
+   {
+       return $this->hasMany(Post::class);
+   }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+
+   public function like()
+   {
+       return $this->hasOne(Like::class);
+   }
+
+
+  public function comments()
+  {
+      return $this->hasMany(Comment::class);
+  }
 
 }

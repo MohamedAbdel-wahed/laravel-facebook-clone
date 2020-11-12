@@ -21,7 +21,6 @@
     <div>
         <button
             @click="showEditProfileModal = true"
-            v-if="authUser.id == profile_owner.id"
             class="px-6 py-2 font-bold text-gray-800 text-sm bg-gray-200 tracking-wide hover:bg-gray-300 focus:outline-none rounded-lg"
         >
             Edit Profile

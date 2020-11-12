@@ -10,7 +10,6 @@
                 class="relative mt-3"
             >
                 <div
-                    v-if="profileOwner.id === post.user.id"
                     class="px-4 py-2 bg-white border border-gray-200 rounded-lg"
                 >
                     <div
@@ -136,14 +135,14 @@
                         </div>
                     </div>
                 </div>
-                <div v-else>
-                    <h1
-                        class="text-3xl text-gray-600 font-extrabold text-center my-32 tracking-wide"
-                    >
-                        No Posts Yet
-                    </h1>
-                </div>
             </div>
+        </div>
+        <div v-else> 
+            <h1
+                class="text-3xl text-gray-600 font-extrabold text-center my-32 tracking-wide"
+            >
+                No Posts Yet
+            </h1>
         </div>
     </div>
 </template>
@@ -157,8 +156,7 @@ export default {
     components: {
         NewPost: () => import(/* webpackChunckName: "NewPost" */ "../NewPost"),
         Like: () => import(/* webpackChunckName: "Like" */ "../Like"),
-        GetLikes: () =>
-            import(/* webpackChunckName: "GetLikes" */ "../GetLikes"),
+        GetLikes: () => import(/* webpackChunckName: "GetLikes" */ "../GetLikes"),
         Comment: () => import(/* webpackChunckName: "Comment" */ "../Comment")
     },
     data() {
@@ -167,22 +165,25 @@ export default {
             toggleSaveIcon: false,
             icon: "save.svg",
             savePostStatus: "Save Post",
-            posts: []
+            posts: [],
+            profileId: this.$route.params.id
         };
     },
     computed: {
         ...mapState(["authUser"])
     },
     mounted() {
-        axios
-            .get("/api/posts")
-            .then(res => {
-                this.posts = res.data;
-                this.$store.dispatch("allPosts", res.data);
-            })
-            .catch(err => console.log(err));
+        this.getPosts()
     },
     methods: {
+        getPosts(){
+            axios
+            .get(`/api/profile/${this.profileId}/posts`)
+            .then(res => {
+                this.posts = res.data;
+            })
+            .catch(err => console.log(err));
+        },
         savePost() {
             this.toggleSaveIcon = !this.toggleSaveIcon;
             if (this.toggleSaveIcon) {
@@ -192,7 +193,14 @@ export default {
                 this.icon = "save.svg";
                 this.savePostStatus = "save Post";
             }
+        },
+        updatedProfileId(){
+            this.profileId= this.$route.params.id
         }
+    },
+    watch:{
+        $route: 'updatedProfileId',
+        profileId: 'getPosts'
     }
 };
 </script>

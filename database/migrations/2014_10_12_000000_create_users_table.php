@@ -19,9 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->text('bio')->nullable();
             $table->text('photo')->nullable();
-            $table->json('all_photos')->nullable();
+            $table->json('all_photos')->default('[]');
             $table->text('cover')->nullable();
-            $table->json('all_covers')->nullable();
+            $table->json('all_covers')->default('[]');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -1,27 +1,54 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import NotFound from '../views/NotFound'
-import Home from '../views/Home'
+import Vue from "vue";
+import Router from "vue-router";
+import NotFound from "../views/NotFound";
+import Home from "../views/Home";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
-    routes:[
-        { 
-        	name: 'Home', 
-        	path:'/home', 
-        	component: Home
+    mode: "history",
+    routes: [
+        {
+            name: "Home",
+            path: "/home",
+            component: Home
         },
-        { 
-        	name: 'Profile',
-        	path:'/profile/:id',
-            component: () => import(/* webpackChunckName: 'Profile' */ '../views/Profile')
+        {
+            name: "Profile",
+            path: "/profile/:id",
+            component: () =>
+                import(/* webpackChunckName: 'Profile' */ "../views/Profile")
         },
-        { 
-        	name: 'NotFound',
-            path:'*',
-            component:NotFound
+        {
+            name: "Videos",
+            path: "/videos",
+            component: () =>
+                import(/* webpackChunckName: 'Videos' */ "../views/Videos")
         },
+        {
+            name: "Notifications",
+            path: "/notifications",
+            component: () =>
+                import(
+                    /* webpackChunckName: 'Notifications' */ "../views/Notifications"
+                )
+        },
+        {
+            name: "Messages",
+            path: "/:username/messages",
+            component: () =>
+                import(/* webpackChunckName: 'Messages' */ "../views/Messages")
+        },
+        {
+            name: "FriendRequests",
+            path: "/:id/requests",
+            component: () =>
+                import(/* webpackChunckName: 'FriendRequests' */ "../views/FriendRequests")
+        },
+        {
+            name: "NotFound",
+            path: "*",
+            component: NotFound
+        }
     ]
-}) 
+});

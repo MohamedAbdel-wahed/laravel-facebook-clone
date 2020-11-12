@@ -77,7 +77,11 @@
             </h1>
             <div class="mt-1">
                 <p class="text-gray-600 text-sm">
-                    {{ profile_owner.bio | strLimit(95) }}
+                    {{
+                        profile_owner.bio
+                            ? profile_owner.bio
+                            : "____" | strLimit(95)
+                    }}
                 </p>
                 <button
                     class="text-center px-3 text-sm py-1 font-bold text-blue-600 hover:text-blue-500 focus:outline-none tracking-wide"
@@ -87,6 +91,7 @@
             </div>
         </div>
         <hr class="my-2 mx-4 rounded-full" />
+
         <div class="flex">
             <div class="w-2/3 px-6 flex justify-around">
                 <button
@@ -146,18 +151,18 @@
                 </button>
             </div>
             <div class="w-1/3 text-right py-1 mt-1 mr-8">
-                <EditProfile
-                    :profile_owner="profile_owner"
-                    :authUser="authUser"
-                />
-
-                <button
-                    v-if="authUser.id !== profile_owner.id"
-                    @click="addFriend()"
-                    class="px-6 py-2 font-bold text-white text-sm bg-blue-500 tracking-wide hover:opacity-75 focus:bg-blue-600 focus:outline-none rounded-lg"
-                >
-                    Add Friend
-                </button>
+                <div v-if="authUser.id === profile_owner.id">
+                    <EditProfile
+                        :profile_owner="profile_owner"
+                        :authUser="authUser"
+                    />
+                </div>
+                <div v-else>
+                    <AddFriend
+                        :profile_owner="profile_owner"
+                        :authUser="authUser"
+                    />
+                </div>
             </div>
         </div>
     </div>
@@ -167,11 +172,13 @@
 import { mapState } from "vuex";
 
 export default {
-    name: "ProfileHead",
+    name: "Head",
     props: ["profile_owner"],
     components: {
         EditProfile: () =>
-            import(/* webPackChunckName: 'EditProfile' */ "./EditProfile")
+            import(/* webPackChunckName: 'EditProfile' */ "./EditProfile"),
+        AddFriend: () =>
+            import(/* webPackChunckName: 'AddFriend' */ "../AddFriend")
     },
     data() {
         return {
@@ -186,3 +193,5 @@ export default {
     }
 };
 </script>
+
+<style scoped></style>

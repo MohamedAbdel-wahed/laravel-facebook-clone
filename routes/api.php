@@ -3,38 +3,36 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::group(['prefix'=>'profile'], function(){
+  Route::get('/{user}/posts', 'ProfileController@getProfilePosts');
+  Route::get('/{user}', 'ProfileController@show');
+
+  Route::group(['middleware'=>'auth'], function(){
+    Route::patch('/{user}/edit', 'ProfileController@update');
+    Route::post('/{user}/add', 'ProfileController@addFriend');
+    Route::get('/{user}/isPending', 'ProfileController@checkIfPending');
+    Route::get('/{user}/requests', 'ProfileController@getRequests');
+    Route::post('/{user}/accept-request', 'ProfileController@acceptRequest');
+    Route::post('/{user}/reject-request', 'ProfileController@rejectRequest');
+    Route::post('/{user}/remove-friend', 'ProfileController@removeFriend');
+  });
+
 });
-
-
-Route::get('/profile/{user}', 'ProfileController@show');
-Route::patch('/profile/{user}/edit', 'ProfileController@update');
-
-
 
 
 Route::group(['prefix'=>'posts'], function(){
     Route::get('/', 'PostController@index');
-    Route::post('/create', 'PostController@create');
-
-    // likes
-    Route::post('/{post}/like', 'PostController@like');
     Route::get('/{post}/like-status', 'PostController@checkIfLiked');
     Route::get('/{post}/likes', 'PostController@getLikes');
-
-    // comments
     Route::get('/{post}/comments', 'CommentController@index');
-    Route::post('/{post}/comments/create', 'CommentController@create');
+
+    Route::group(['middleware'=>'auth'], function(){
+      Route::post('/create', 'PostController@create');
+      Route::post('/{post}/like', 'PostController@like');
+      Route::post('/{post}/comments/create', 'CommentController@create');
+    });
+    
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Comment;
+use App\Events\NewComment;
 
 
 class CommentController extends Controller
@@ -31,6 +32,8 @@ class CommentController extends Controller
       ));
 
       $comment->user= auth()->user();
+
+      broadcast(New NewComment($comment))->toOthers();
 
        return response()->json($comment);
     }

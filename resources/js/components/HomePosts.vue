@@ -110,21 +110,12 @@
                         <span class="text-sm text-gray-700">22 shares</span>
                     </div>
                 </div>
-                <hr class="mt-2" />
+                <hr class="mt-2" /> 
                 <div class="w-full py-2 px-2 flex">
                     <Like :postId="post.id" />
 
-                    <div
-                        class="w-1/3 flex justify-center items-center px-2 py-1 hover:bg-gray-100 cursor-pointer rounded-lg"
-                    >
-                        <img
-                            src="/images/svg/comment.svg"
-                            class="w-6 h-6 rounded-full"
-                        />
-                        <span class="text-sm ml-2 font-bold text-gray-500"
-                            >Comment</span
-                        >
-                    </div>
+                     <Comment :postId="post.id" />
+
                     <div
                         class="w-1/3 flex justify-center items-center px-2 py-1 hover:bg-gray-100 cursor-pointer rounded-lg"
                     >
@@ -143,14 +134,13 @@
 </template>
 
 <script>
-import Like from "./Like";
-import GetLikes from "./GetLikes";
 
 export default {
     name: "HomePosts",
     components: {
-        Like,
-        GetLikes
+        Like: () => import(/* webpackChunckName: "Like" */ "./Like"),
+        GetLikes: () => import(/* webpackChunckName: "GetLikes" */ "./GetLikes"),
+        Comment: () => import(/* webpackChunckName: "Comment" */ "./Comment")
     },
     data() {
         return {

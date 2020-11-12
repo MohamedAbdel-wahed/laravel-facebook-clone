@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-16 overflow-hidden" id="profile" style="height:75rem">
+    <div class="mt-16 overflow-hidden" id="profile" style="height:93.3rem">
         <Head :profile_owner="profile_owner" />
 
         <div class="ml-10 py-4 px-56 border-t">
@@ -24,7 +24,6 @@
 
 <script>
 import { mapState } from "vuex";
-
 export default {
     name: "Profile",
     components: {
@@ -76,13 +75,11 @@ export default {
     width: 1px;
     background-color: #f5f5f5;
 }
-
 #profile::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     background-color: #f5f5f5;
 }
-
 #profile::-webkit-scrollbar-thumb {
     border-radius: 2px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
