@@ -113,13 +113,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["authUser"])),
+  mounted: function mounted() {
+    this.newRequestListener();
+    this.getRequestNotificaton();
+  },
   methods: {
     newRequestListener: function newRequestListener() {
       var _this = this;
 
       Echo.channel("request.".concat(this.authUser.id)).listen("NewRequest", function (request) {
-        console.log(request);
         _this.numOfRequests = request.requests;
+      });
+    },
+    getRequestNotificaton: function getRequestNotificaton() {
+      axios.get("/api/notifications/requests-count").then(function (res) {
+        if (res.data !== []) {
+          console.log(ddd);
+        }
+      })["catch"](function (err) {
+        return console.log(err);
       });
     }
   }
@@ -191,6 +203,11 @@ var render = function() {
               staticClass: "flex items-center px-10 py-2",
               attrs: {
                 to: { name: "FriendRequests", params: { id: _vm.authUser.id } }
+              },
+              on: {
+                click: function($event) {
+                  _vm.numOfRequests = 0
+                }
               }
             },
             [
@@ -207,7 +224,11 @@ var render = function() {
                   staticClass:
                     "ml-2 rounded-full bg-red-500 text-white font-semibold px-1 text-sm"
                 },
-                [_vm._v("+3")]
+                [
+                  _vm._v(
+                    _vm._s(_vm.numOfRequests > 0 ? "+" + _vm.numOfRequests : "")
+                  )
+                ]
               )
             ]
           )

@@ -23,7 +23,7 @@ class NewRequest implements ShouldBroadcast
      */
     public function __construct($request)
     {
-        $this->request=$request;
+        $this->request= $request;
     }
 
     /**

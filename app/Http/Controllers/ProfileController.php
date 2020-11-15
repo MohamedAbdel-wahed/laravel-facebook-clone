@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Events\NewRequest;
-use Auth;
+use App\Notifications\NewFriendRequest;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
 class ProfileController extends Controller
@@ -97,6 +98,7 @@ class ProfileController extends Controller
     $broadcastData['requests']= count($requests);
 
     broadcast(New NewRequest($broadcastData))->toOthers();
+    $user->notify(new NewFriendRequest(count($requests)));
 
     return response()->json($result);
   }

@@ -13,16 +13,7 @@
                             <h1 class="ml-3 font-semibold text-gray-600">{{ request.first_name+' '+request.last_name }}</h1>
                         </router-link>
                    </div>
-                   <div v-if="isPending && !isFriend" class="flex items-center">
-                        <button @click="acceptRequest(request.id)" class="mr-3 px-4 py-1 font-bold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg">Accept</button>
-                        <button @click="rejectRequest(request.id)" class="px-4 py-1 font-bold text-sm text-white bg-red-500 hover:text-red-200 focus:outline-none focus:bg-red-700 rounded-lg">Reject</button>
-                   </div>
-                   <div v-if="!isPending && isFriend" class="text-green-600 text-sm">
-                       <p>Happy Friendship :) </p>
-                   </div>
-                    <div v-if="!isPending && !isFriend" class="text-red-600 text-sm">
-                       <p>Rejected </p>
-                   </div>
+                   <ManageRequest :profileId="request.id" />
                 </div>
             </div>
         </div>
@@ -39,49 +30,30 @@ export default {
         List: () =>
             import(/* webpackChunckName: 'List' */ "../components/List"),
         Contacts: () =>
-            import(/* webpackChunckName: 'Contacts' */ "../components/Contacts")
+            import(/* webpackChunckName: 'Contacts' */ "../components/Contacts"),
+        ManageRequest: () =>
+            import(/* webpackChunckName: 'ManageRequest' */ "../components/ManageRequest"),
     },
     data() {
         return {
-            requests:[],
-            friendship:null,
-            isPending:true,
-            isFriend:false,
-            numOfRequests: null
+            requests:[]
         }
     },
     computed:{
         ...mapState(['authUser'])
     },
     mounted(){
-        axios.get(`/api/profile/${this.authUser.id}/requests`)
+        this.getRequests()
+    },
+    methods:{
+        getRequests(){
+             axios.get(`/api/profile/${this.authUser.id}/requests`)
              .then(res=>{
                  this.requests= res.data
              }).catch(err=>console.log(err))
-
-             this.newRequestListener() 
-    },
-    methods:{
-        manageResponseData(data){
-          this.friendship= data.friendship
-          this.isPending= data.isPending
-          this.isFriend= data.isFriend
-        },
-        acceptRequest(profileId){
-            axios.post(`/api/profile/${profileId}/accept-request`)
-                .then(res=>{
-                console.log(res.data)
-                    this.manageResponseData(res.data)
-                }).catch(err=> console.log(err))
-        },
-        rejectRequest(profileId){
-            axios.post(`/api/profile/${profileId}/reject-request`)
-                    .then(res=>{
-                    this.manageResponseData(res.data)
-                    console.log(res.data)
-                    }).catch(err=>console.log(err))
-        },
+        }
     }
+    
 };
 </script>
 

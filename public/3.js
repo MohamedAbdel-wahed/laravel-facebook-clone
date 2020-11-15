@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["postId"],
   components: {
     NewComment: function NewComment() {
-      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./NewComment */ "./resources/js/components/NewComment.vue"));
+      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./NewComment */ "./resources/js/components/NewComment.vue"));
     },
     GetComments: function GetComments() {
       return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./GetComments */ "./resources/js/components/GetComments.vue"));

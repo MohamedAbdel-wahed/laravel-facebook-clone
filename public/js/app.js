@@ -2385,7 +2385,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/Contacts */ "./resources/js/components/Contacts.vue"));
     },
     Stories: function Stories() {
-      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/Stories */ "./resources/js/components/Stories.vue"));
+      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/Stories */ "./resources/js/components/Stories.vue"));
     },
     NewPost: function NewPost() {
       return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/NewPost */ "./resources/js/components/NewPost.vue"));

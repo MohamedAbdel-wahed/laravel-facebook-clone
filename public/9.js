@@ -39,15 +39,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FriendRequests",
@@ -57,53 +48,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     Contacts: function Contacts() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/Contacts */ "./resources/js/components/Contacts.vue"));
+    },
+    ManageRequest: function ManageRequest() {
+      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/ManageRequest */ "./resources/js/components/ManageRequest.vue"));
     }
   },
   data: function data() {
     return {
-      requests: [],
-      friendship: null,
-      isPending: true,
-      isFriend: false,
-      numOfRequests: null
+      requests: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['authUser'])),
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/api/profile/".concat(this.authUser.id, "/requests")).then(function (res) {
-      _this.requests = res.data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-    this.newRequestListener();
+    this.getRequests();
+    this.markRequestsAsRead();
   },
   methods: {
-    manageResponseData: function manageResponseData(data) {
-      this.friendship = data.friendship;
-      this.isPending = data.isPending;
-      this.isFriend = data.isFriend;
-    },
-    acceptRequest: function acceptRequest(profileId) {
-      var _this2 = this;
+    getRequests: function getRequests() {
+      var _this = this;
 
-      axios.post("/api/profile/".concat(profileId, "/accept-request")).then(function (res) {
-        console.log(res.data);
-
-        _this2.manageResponseData(res.data);
+      axios.get("/api/profile/".concat(this.authUser.id, "/requests")).then(function (res) {
+        _this.requests = res.data;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
-    rejectRequest: function rejectRequest(profileId) {
-      var _this3 = this;
-
-      axios.post("/api/profile/".concat(profileId, "/reject-request")).then(function (res) {
-        _this3.manageResponseData(res.data);
-
-        console.log(res.data);
-      })["catch"](function (err) {
+    markRequestsAsRead: function markRequestsAsRead() {
+      axios.get("/api/notifications/requests").then()["catch"](function (err) {
         return console.log(err);
       });
     }
@@ -258,50 +229,9 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm.isPending && !_vm.isFriend
-                    ? _c("div", { staticClass: "flex items-center" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "mr-3 px-4 py-1 font-bold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg",
-                            on: {
-                              click: function($event) {
-                                return _vm.acceptRequest(request.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Accept")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "px-4 py-1 font-bold text-sm text-white bg-red-500 hover:text-red-200 focus:outline-none focus:bg-red-700 rounded-lg",
-                            on: {
-                              click: function($event) {
-                                return _vm.rejectRequest(request.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Reject")]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isPending && _vm.isFriend
-                    ? _c("div", { staticClass: "text-green-600 text-sm" }, [
-                        _c("p", [_vm._v("Happy Friendship :) ")])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  !_vm.isPending && !_vm.isFriend
-                    ? _c("div", { staticClass: "text-red-600 text-sm" }, [
-                        _c("p", [_vm._v("Rejected ")])
-                      ])
-                    : _vm._e()
-                ]
+                  _c("ManageRequest", { attrs: { profileId: request.id } })
+                ],
+                1
               )
             }),
             0

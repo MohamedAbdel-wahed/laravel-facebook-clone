@@ -31,13 +31,13 @@
             <li
                 class="my-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700"
             >
-                <router-link :to="{ name: 'FriendRequests', params: { id: authUser.id } }" class="flex items-center px-10 py-2">
+                <router-link :to="{ name: 'FriendRequests', params: { id: authUser.id } }" @click="markRequestsAsRead()" class="flex items-center px-10 py-2">
                     <img
                     src="/images/svg/add-friend.svg"
                     class="w-8 h-8 rounded-full"
                 />
                 <span class="ml-2">Requests</span>
-                <span class="ml-2 rounded-full bg-red-500 text-white font-semibold px-1 text-sm">{</span>
+                <span class="ml-2 rounded-full bg-red-500 text-white font-semibold px-1 text-sm">{{ numOfRequests>0 ? `+${numOfRequests}` : '' }}</span>
                 </router-link>
             </li>
             <li
@@ -99,16 +99,33 @@ export default {
     computed: {
         ...mapState(["authUser"])
     },
+    mounted(){
+         this.newRequestListener() 
+         this.getRequestNotificaton() 
+    },
     methods:{
         newRequestListener() {
             Echo.channel(`request.${this.authUser.id}`).listen( 
                 "NewRequest",
                 request => {
-                    console.log(request)
                     this.numOfRequests= request.requests
                 }
             );
         },
+        getRequestNotificaton(){
+            axios.get(`/api/notifications/requests-count`)
+                 .then(res=>{
+                      if(res.data.length>0){
+                          this.numOfRequests= res.data[0].data.requests
+                      }
+
+            }).catch(err=> console.log(err))
+        },
+        markRequestsAsRead(){
+            axios.get(`/api/notifications/requests`).then(()=>{
+                this.numOfRequests= 0
+            }).catch(err=>console.log(err))
+        }
     }
 };
 </script>

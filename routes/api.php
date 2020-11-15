@@ -36,3 +36,9 @@ Route::group(['prefix'=>'posts'], function(){
     });
     
 });
+
+
+Route::group(['prefix' => 'notifications', 'middleware'=> 'auth'], function () {
+    Route::get('/requests-count', 'NotificationController@getNumOFRequests');
+    Route::get('/requests', 'NotificationController@showRequests');
+});

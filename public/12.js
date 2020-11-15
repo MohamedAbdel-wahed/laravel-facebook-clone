@@ -45,7 +45,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Profile",
   components: {
     Head: function Head() {
-      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/profile/Head */ "./resources/js/components/profile/Head.vue"));
+      return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/profile/Head */ "./resources/js/components/profile/Head.vue"));
     },
     Timeline: function Timeline() {
       return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/profile/Timeline */ "./resources/js/components/profile/Timeline.vue"));

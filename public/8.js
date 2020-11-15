@@ -37,10 +37,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: ["profile_owner"],
   components: {
     Posts: function Posts() {
-      return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./Posts */ "./resources/js/components/profile/Posts.vue"));
+      return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./Posts */ "./resources/js/components/profile/Posts.vue"));
     },
     Info: function Info() {
-      return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./Info */ "./resources/js/components/profile/Info.vue"));
+      return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./Info */ "./resources/js/components/profile/Info.vue"));
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["posts"]))
