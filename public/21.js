@@ -165,6 +165,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Posts",
@@ -326,84 +328,54 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "W-7/12 flex items-center" },
-                    [
+                  _c("div", { staticClass: "W-7/12 flex items-center" }, [
+                    _vm._v(
+                      '", params: { id: profileOwner.id } }"\n                        class="border border-gray-200 rounded-full"\n                    >\n                        '
+                    ),
+                    _c("img", {
+                      staticClass:
+                        "border border-gray-300 w-10 h-10 rounded-full",
+                      attrs: {
+                        src: post.user.photo
+                          ? "/storage/uploads/profile/" + post.user.photo
+                          : "/images/svg/default-male.svg"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "ml-2 flex flex-col" }, [
+                      _vm._v(
+                        '", params: { id: profileOwner.id } }"\n                         class="hover:underline">\n                            '
+                      ),
                       _c(
-                        "router-link",
-                        {
-                          staticClass: "border border-gray-200 rounded-full",
-                          attrs: { to: "#" }
-                        },
+                        "h1",
+                        { staticClass: "text-gray-800 font-bold text-sm" },
                         [
-                          _c("img", {
-                            staticClass:
-                              "border border-gray-300 w-10 h-10 rounded-full",
-                            attrs: {
-                              src: post.user.photo
-                                ? "/storage/uploads/profile/" + post.user.photo
-                                : "/images/svg/default-male.svg"
-                            }
-                          })
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(
+                                post.user.first_name + " " + post.user.last_name
+                              ) +
+                              "\n                            "
+                          )
                         ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "ml-2 flex flex-col" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "hover:underline",
-                              attrs: { to: "#" }
-                            },
-                            [
-                              _c(
-                                "h1",
-                                {
-                                  staticClass: "text-gray-800 font-bold text-sm"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        post.user.first_name +
-                                          " " +
-                                          post.user.last_name
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "flex items-center" }, [
-                            _c("p", { staticClass: "text-gray-500 text-xs" }, [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(
-                                    _vm._f("formatTime")(post.created_at)
-                                  ) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("img", {
-                              staticClass: "ml-2 w-4 h-4 rounded-full",
-                              attrs: {
-                                src: "/images/svg/" + post.privacy + ".svg"
-                              }
-                            })
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
+                      _c("div", { staticClass: "flex items-center" }, [
+                        _c("p", { staticClass: "text-gray-500 text-xs" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm._f("formatTime")(post.created_at)) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "ml-2 w-4 h-4 rounded-full",
+                          attrs: { src: "/images/svg/" + post.privacy + ".svg" }
+                        })
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "mt-3 px-12" }, [
                     _c(

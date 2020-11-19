@@ -112,6 +112,9 @@ export default {
             covers: []
         };
     },
+    mounted(){
+        console.log(profile_owner)
+    },
     methods: {
         parseImages() {
             this.photos = JSON.parse(this.profile_owner.all_photos);

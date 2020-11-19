@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Auth; 
+use App\Models\User;
+
 
 class NotificationController extends Controller
 {
     public function getNumOFRequests()
     {
-        $notifications= auth()->user()->unreadNotifications()->where('type','App\Notifications\NewFriendRequest')->get();
+        $requests= User::where('id', Auth::id())->get()->pluck('requests');
 
-        return response()->json($notifications);
+        return $requests;
     }
 
     public function showRequests()
     {
-        $notifications= auth()->user()->unreadNotifications()->where('type','App\Notifications\NewFriendRequest')->get();
-        $notifications->markAsRead();
+        User::where('id', Auth::id())->update([
+            'requests'=> 0
+        ]);
     }
-
 
 }

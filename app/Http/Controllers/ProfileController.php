@@ -98,7 +98,9 @@ class ProfileController extends Controller
     $broadcastData['requests']= count($requests);
 
     broadcast(New NewRequest($broadcastData))->toOthers();
-    $user->notify(new NewFriendRequest(count($requests)));
+    User::where('id',$user->id)->update([
+      "requests"=> count($requests)
+    ]);
 
     return response()->json($result);
   }
@@ -154,6 +156,11 @@ class ProfileController extends Controller
      auth()->user()->remove_friend($user);
      return response()->json(['friendship'=>null,'isPending'=>false, 'isFriend'=>false]);
   } 
+
+  public function getFriends()
+  {
+    
+  }
 
 
 

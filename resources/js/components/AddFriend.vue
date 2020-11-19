@@ -24,7 +24,7 @@
                 </button>
                 <button
                 @click="rejectRequest()"
-                    class="ml-3 px-4 py-1 font-semibold text-white bg-red-500 text-sm tracking-wide hover:bg-red-700 focus:outline-none rounded-lg"
+                    class="ml-3 px-4 py-1 font-semibold text-gray-900 bg-white text-sm tracking-wide border border-gray-300 hover:text-red-400 focus:outline-none rounded-lg"
                 >
                     reject
                 </button>
@@ -33,7 +33,7 @@
       <button 
       @click="removeFriend()"
       v-if="isFriend && !isPending"
-      class="px-4 py-1 font-semibold text-gray-800 text-sm tracking-wide bg-white border border-gray-400 rounded-lg shadow-sm hover:bg-gray-900 hover:text-white focus:outline-none"
+      class="px-4 py-1 font-semibold text-gray-800 text-sm tracking-wide bg-white border border-gray-300 rounded-lg shadow-sm hover:text-red-400 focus:outline-none"
       >
       remove friend
       </button>

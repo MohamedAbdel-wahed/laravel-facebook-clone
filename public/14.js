@@ -193,7 +193,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "ml-3 px-4 py-1 font-semibold text-white bg-red-500 text-sm tracking-wide hover:bg-red-700 focus:outline-none rounded-lg",
+                      "ml-3 px-4 py-1 font-semibold text-gray-900 bg-white text-sm tracking-wide border border-gray-300 hover:text-red-400 focus:outline-none rounded-lg",
                     on: {
                       click: function($event) {
                         return _vm.rejectRequest()
@@ -212,7 +212,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "px-4 py-1 font-semibold text-gray-800 text-sm tracking-wide bg-white border border-gray-400 rounded-lg shadow-sm hover:bg-gray-900 hover:text-white focus:outline-none",
+              "px-4 py-1 font-semibold text-gray-800 text-sm tracking-wide bg-white border border-gray-300 rounded-lg shadow-sm hover:text-red-400 focus:outline-none",
             on: {
               click: function($event) {
                 return _vm.removeFriend()

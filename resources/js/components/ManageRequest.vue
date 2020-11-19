@@ -1,8 +1,8 @@
 <template>
 <div>
     <div v-if="isPending && !isFriend" class="flex items-center">
-        <button @click="acceptRequest(profileId)" class="mr-3 px-4 py-1 font-bold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg">Accept</button>
-        <button @click="rejectRequest(profileId)" class="px-4 py-1 font-bold text-sm text-white bg-red-500 hover:text-red-200 focus:outline-none focus:bg-red-700 rounded-lg">Reject</button>
+        <button @click="acceptRequest(profileId)" class="mr-3 px-4 py-1 font-semibold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg">Accept</button>
+        <button @click="rejectRequest(profileId)" class="px-4 py-1 font-semibold text-sm text-gray-900 bg-white hover:text-red-300 border border-gray-200 focus:outline-none focus:bg-red-700 rounded-lg">Reject</button>
     </div>
     <div v-if="!isPending && isFriend" class="text-green-600 text-sm">
         <p>Happy Friendship</p>

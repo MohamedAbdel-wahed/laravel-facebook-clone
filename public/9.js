@@ -74,7 +74,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     markRequestsAsRead: function markRequestsAsRead() {
-      axios.get("/api/notifications/requests").then()["catch"](function (err) {
+      axios.get("/api/notifications/requests").then(function () {// readed the requests notifications in this step
+      })["catch"](function (err) {
         return console.log(err);
       });
     }

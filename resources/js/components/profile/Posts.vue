@@ -5,7 +5,7 @@
         </div>
         <div v-if="posts.length > 0">
             <div
-                v-for="(post, index) in posts"
+                v-for="(post,index) in posts"
                 :key="post.id"
                 class="relative mt-3"
             >
@@ -71,7 +71,7 @@
                     </ul>
                     <div class="W-7/12 flex items-center">
                         <router-link
-                            to="#"
+                            :to="{ name: "Profile", params: { id: profileOwner.id } }"
                             class="border border-gray-200 rounded-full"
                         >
                             <img
@@ -84,7 +84,9 @@
                             />
                         </router-link>
                         <div class="ml-2 flex flex-col">
-                            <router-link to="#" class="hover:underline">
+                            <router-link 
+                            :to="{ name: "Profile", params: { id: profileOwner.id } }"
+                             class="hover:underline">
                                 <h1 class="text-gray-800 font-bold text-sm">
                                     {{
                                         `${post.user.first_name} ${post.user.last_name}`

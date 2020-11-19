@@ -20,18 +20,20 @@
                 </router-link>
             </li>
             <li
-                class="flex items-center my-2 px-10 py-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700"
+                class="my-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700"
             >
+                <router-link :to="{ name: 'Friends', params: { id: authUser.id } }" @click="this.numOfRequests= 0" class="flex items-center px-10 py-2">
                 <img
                     src="/images/svg/friends.svg"
                     class="w-8 h-8 rounded-full"
                 />
                 <span class="ml-2">Friends</span>
+                </router-link>
             </li>
             <li
                 class="my-2 font-bold hover:text-blue-500 hover:bg-blue-100 cursor-pointer rounded-lg text-gray-700"
             >
-                <router-link :to="{ name: 'FriendRequests', params: { id: authUser.id } }" @click="markRequestsAsRead()" class="flex items-center px-10 py-2">
+                <router-link :to="{ name: 'FriendRequests', params: { id: authUser.id } }" @click="this.numOfRequests= 0" class="flex items-center px-10 py-2">
                     <img
                     src="/images/svg/add-friend.svg"
                     class="w-8 h-8 rounded-full"
@@ -115,17 +117,10 @@ export default {
         getRequestNotificaton(){
             axios.get(`/api/notifications/requests-count`)
                  .then(res=>{
-                      if(res.data.length>0){
-                          this.numOfRequests= res.data[0].data.requests
-                      }
-
+                        this.numOfRequests= res.data
             }).catch(err=> console.log(err))
         },
-        markRequestsAsRead(){
-            axios.get(`/api/notifications/requests`).then(()=>{
-                this.numOfRequests= 0
-            }).catch(err=>console.log(err))
-        }
-    }
+       
+    },
 };
 </script>

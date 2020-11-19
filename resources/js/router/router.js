@@ -40,6 +40,12 @@ export default new Router({
                 import(/* webpackChunckName: 'Messages' */ "../views/Messages")
         },
         {
+            name: "Friends",
+            path: "/:id/friends",
+            component: () =>
+                import(/* webpackChunckName: 'Friends' */ "../views/Friends")
+        },
+         {
             name: "FriendRequests",
             path: "/:id/requests",
             component: () =>

@@ -44,6 +44,7 @@ export default {
     },
     mounted(){
         this.getRequests()
+        this.markRequestsAsRead()
     },
     methods:{
         getRequests(){
@@ -51,9 +52,13 @@ export default {
              .then(res=>{
                  this.requests= res.data
              }).catch(err=>console.log(err))
+        },
+         markRequestsAsRead(){
+            axios.get(`/api/notifications/requests`).then(()=>{
+                // readed the requests notifications in this step
+            }).catch(err=>console.log(err))
         }
     }
-    
 };
 </script>
 

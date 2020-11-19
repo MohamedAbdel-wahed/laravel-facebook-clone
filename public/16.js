@@ -91,7 +91,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "mr-3 px-4 py-1 font-bold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg",
+                "mr-3 px-4 py-1 font-semibold text-sm text-white bg-blue-500 hover:text-blue-200 focus:outline-none focus:bg-blue-700 rounded-lg",
               on: {
                 click: function($event) {
                   return _vm.acceptRequest(_vm.profileId)
@@ -105,7 +105,7 @@ var render = function() {
             "button",
             {
               staticClass:
-                "px-4 py-1 font-bold text-sm text-white bg-red-500 hover:text-red-200 focus:outline-none focus:bg-red-700 rounded-lg",
+                "px-4 py-1 font-semibold text-sm text-gray-900 bg-white hover:text-red-300 border border-gray-200 focus:outline-none focus:bg-red-700 rounded-lg",
               on: {
                 click: function($event) {
                   return _vm.rejectRequest(_vm.profileId)
